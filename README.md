@@ -91,10 +91,6 @@ tests/               pytest (SQLite + eager Celery)
 docker/              entrypoint.sh для контейнера
 ```
 
-Роутеры намеренно тонкие — вся работа с БД и логика брони живут в
-`app/services/bookings.py` (класс `BookingService`). Воркеру это удобно: он
-дёргает БД напрямую через сессию, без HTTP-слоя.
-
 ## Технические решения
 
 **FastAPI + Celery.** FastAPI закрывает требования к API (валидация через
@@ -197,7 +193,7 @@ WORKER_FAILURE_RATE=0.15
 WORKER_MAX_RETRIES=3
 ```
 
-## Что осталось за бортом
+## Чего не использовал
 
 - Аутентификация и multi-tenancy — за рамками ТЗ.
 - Полноценный outbox — для текущего масштаба хватает `acks_late` +
